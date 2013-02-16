@@ -5,13 +5,13 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , apiRoutes = require('./api_routes')
   , http = require('http')
   , path = require('path')
   , cons = require('consolidate')
   , swig = require('swig');
 
 var app = express();
-
 app.configure(function(){
   swig.init({
     root: __dirname + '/views',
@@ -39,6 +39,8 @@ app.get('/', routes.index);
 app.get('/create', routes.createNew);
 app.post('/create', routes.create);
 app.get('/show', routes.show);
+
+app.get('/api/getInfo', apiRoutes.responseInfomation);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
