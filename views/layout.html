@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}ツール名{% endblock %}</title>
+        <title>{% block title %}Favor - open wish list -{% endblock %}</title>
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <style type="text/css">
             body {
@@ -20,10 +20,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="brand" href="#">Project name</a>
+              <a class="brand" href="#">Favor</a>
               <div class="nav-collapse collapse">
                 <ul class="nav">
-                  <li><a href="/create">新規作成</a></li>
+                  <li><a href="/create">create</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
             </div>
@@ -32,8 +32,9 @@
         <div class="container">
             {% block contents %}
             {% endblock %}
+            <hr>
             <footer>
-                <p>Copyright (c) 2013 Team Nomonos All Rights Reserved.</p>
+                <p>Copyright (c) 2013 Team-nomonos All Rights Reserved.</p>
             </footer>
         </div>
         <script src="/javascripts/jquery-1.9.1.min.js"></script>
