@@ -46,7 +46,8 @@ exports.create = function(req, res) {
       return;
     }
 
-    res.render('createNew.html', { title: 'Express', action: 'createNew' });
+    res.redirect('/show/' + uniq_code);
+    return;
   });
 
 };

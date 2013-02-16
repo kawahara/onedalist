@@ -39,7 +39,7 @@ app.get('/', routes.index);
 app.get('/index', routes.index);
 app.get('/create', routes.createNew);
 app.post('/create', routes.create);
-app.get('/show', routes.show);
+app.get('/show/:id', routes.show);
 
 app.get('/api/getInfo', apiRoutes.responseInfomation);
 
