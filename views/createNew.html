@@ -17,30 +17,121 @@
   <h4>URL</h4>
   <div class="navbar">
     <div class="navbar-inner">
-      <form class="navbar-form pull-left" method="GET" action="check">
-      <input type="text" class="span8" name="url" placeholder="input url">
-      <button type="submit" class="btn">Check</button>
+      <form id="url-form" class="navbar-form pull-left" method="GET" action="#">
+        <input type="text" class="span8" name="url" placeholder="input url">
+        <button type="submit" class="btn">Check</button>
       </form>
-      <div id="suggestionArea">
-        <span class="label">Default</span>
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <!-- Nested media object -->
-            <div class="media">
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
+  <div id="suggest">
+  </div>
+
 </div>
 
-<div id="previewArea">
-  <h4>Preview</h4>
+<h4>Preview</h4>
+<div id="preview">
+
 </div>
 
+<form id="make" method="POST" action="/create">
+  <button type="submit" class="btn btn-primary">作成</button>
+</form>
+
+{% endblock %}
+
+{% block bottom %}
+
+{% raw %}
+<script id="stmpl" type="text/x-jquery-tmpl">
+${hoge}
+<div class="row">
+  <div class="span1">
+    ${type}
+  </div>
+  <div class="span4">
+    {{if image }}
+      <img src="${image}" />
+    {{/if}}
+  </div>
+  <div class="span6">
+    <div class="title">${title}</div>
+    {{if cost }}
+    <div class="cost">${cost}</div>
+    {{/if}}
+    {{if description}}
+    <div class="description">${description}</div>
+    {{/if}}
+  </div>
+  {{if $item.isa }}
+  <div class="span1">
+    <button class="s-add-button btn btn-primary" type="button">Add</button>
+  </div>
+  {{/if}}
+</div>
+</script>
+<script id="tinput" type="text/x-jquery-tmpl">
+<input type="hidden" value="${title}" name="item[${n}][title]">
+<input type="hidden" value="${image}" name="item[${n}][image]">
+<input type="hidden" value="${url}" name="item[${n}][url]">
+</script>
+<script>
+$(function() {
+  var getTitle = function(info) {
+    if (info.ogTitle) {
+      return info.ogTitle;
+    }
+
+    return info.title;
+  };
+  var getOneImage = function(info) {
+    if (info.ogImage) {
+      return info.ogImage;
+    }
+
+    if (info.images.length > 0) {
+      return info.images[0].src;
+    }
+
+    return null;
+  };
+
+  var n = 0;
+
+  $("#preview").empty();
+  $("#make").hide();
+  $("#url-form").submit(function(event){
+    var url = event.target.url.value;
+    $.ajax({
+      type: "GET",
+      url: "/api/getInfo",
+      data: {url: url},
+      dataType: 'json',
+      success: function(data) {
+        $("#suggest").empty();
+        data.url   = url;
+        data.image = getOneImage(data);
+        data.type  = "type";
+        data.title = getTitle(data);
+
+        var obj = $("#stmpl").tmpl(data, {isa: true});
+        obj.appendTo($('#suggest'));
+        $(obj).find('.s-add-button').click(function(e){
+          data.n = n;
+          $("#make").show();
+          $("#stmpl").tmpl(data).appendTo($('#preview'));
+          $("#tinput").tmpl(data).appendTo($('#make'));
+          obj.remove();
+          n++;
+          return;
+        });
+      },
+      error: function(xhr, status, error) {
+      }
+    });
+
+    return false;
+  });
+});
+</script>
+{% endraw %}
 {% endblock %}
