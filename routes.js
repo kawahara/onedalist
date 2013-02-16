@@ -1,3 +1,5 @@
+var model = require('./lib/model');
+
 /**
  * get home page
  */
