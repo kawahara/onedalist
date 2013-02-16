@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block contents %}
+
+<div id="mainArea">
+  <h4>Name</h4>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <form class="navbar-form pull-left" method="GET" action="check">
+      <input type="text" class="span8" name="name" placeholder="input your favor name">
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="listArea">
+  <h4>URL</h4>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <form class="navbar-form pull-left" method="GET" action="check">
+      <input type="text" class="span8" name="url" placeholder="input url">
+      <button type="submit" class="btn">Check</button>
+      </form>
+      <div id="suggestionArea">
+        <span class="label">Default</span>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" data-src="holder.js/64x64">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            <!-- Nested media object -->
+            <div class="media">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="previewArea">
+  <h4>Preview</h4>
+</div>
+
+{% endblock %}
