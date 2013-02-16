@@ -40,6 +40,7 @@ exports.create = function(req, res) {
 
     RequestListModel.items.push(RequestItemModel); 
   }
+
   RequestListModel.save(function(err) {
     if (err) {
       res.render('createNew.html', { title: 'Express', action: 'createNew' });
@@ -49,7 +50,6 @@ exports.create = function(req, res) {
     res.redirect('/show/' + uniq_code);
     return;
   });
-
 };
 
 /**

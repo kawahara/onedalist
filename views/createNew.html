@@ -7,7 +7,7 @@
   <div class="navbar">
     <div class="navbar-inner">
       <form class="navbar-form pull-left" method="GET" action="check">
-      <input type="text" class="span8" name="name" placeholder="input your favor name">
+      <input type="text" class="span8" id="input-subject" name="name" placeholder="input your favor name">
       </form>
     </div>
   </div>
@@ -99,6 +99,14 @@ $(function() {
 
   $("#preview").empty();
   $("#make").hide();
+  $("#make").submit(function(event) {
+    $('<input>')
+      .attr('type', 'hidden')
+      .attr('name', 'subject')
+      .attr('value', $("#input-subject").val())
+      .appendTo('#make');
+
+  });
   $("#url-form").submit(function(event){
     var url = event.target.url.value;
     $.ajax({
@@ -131,6 +139,7 @@ $(function() {
 
     return false;
   });
+
 });
 </script>
 {% endraw %}
