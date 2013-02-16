@@ -11,7 +11,7 @@ exports.index = function(req, res){
  * create form
  */
 exports.createNew = function(req, res){
-  res.render('createNew.html', { title: 'Express' });
+  res.render('createNew.html', { title: 'Express', action: 'createNew' });
 };
 
 /**

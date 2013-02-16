@@ -22,12 +22,12 @@
               </button>
               <a class="brand" href="/index">Favor</a>
               <div class="nav-collapse collapse">
+                {% if action == 'createNew' %}
+                <p class="pull-right"><button type="submit" class="btn">Submit</button></p>
+                {% endif %}
                 <ul class="nav">
                   {% if action == 'index' %}
                     <li><a href="/createNew">create</a></li>
-                  {% endif %}
-                  {% if action == 'createNew' %}
-                    <li><a href="/create" class="btn">Submit</a><li>
                   {% endif %}
                 </ul>
               </div><!--/.nav-collapse -->
