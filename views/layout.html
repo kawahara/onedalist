@@ -20,11 +20,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="brand" href="#">Favor</a>
+              <a class="brand" href="/index">Favor</a>
               <div class="nav-collapse collapse">
+                {% if action == 'index' %}
                 <ul class="nav">
                   <li><a href="/create">create</a></li>
                 </ul>
+                {% endif %}
               </div><!--/.nav-collapse -->
             </div>
           </div>
