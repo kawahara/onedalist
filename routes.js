@@ -21,20 +21,24 @@ exports.createNew = function(req, res){
 exports.create = function(req, res) {
   var d = new Date();
   var dt = d.getTime();
-  uniq_code = crypto.createHash('md5').update(dt+req.subject).digist("hex");
+  var dt_str = (dt).toString();
+  var listData = req.body;
+  uniq_code = crypto.createHash('md5').update(dt_str+listData.subject).digest("hex");
 
   RequestListModel = new model.RequestList();
-  RequestListModel.subject = req.params.subject;
+  RequestListModel.subject = listData.subject;
   RequestListModel.code = uniq_code;
   RequestListModel.items = [];
 
-  for(var i = 0; i < req.items.length; i++) {
+  console.log(listData);
+
+  for(var i = 0; i < listData.items.length; i++) {
   	RequestItemModel = new model.RequestItem();
-  	RequestItemModel.subject = req.items[i].subject;
-  	RequestItemModel.overview = req.items[i].overview;
-  	RequestItemModel.cost = req.items[i].cost;
-  	RequestItemModel.type = req.items[i]type;
-  	RequestItemModel.source_url = req.items[i].source_url;
+  	RequestItemModel.subject = listData.items[i].subject;
+  	RequestItemModel.overview = listData.items[i].overview;
+  	RequestItemModel.cost = listData.items[i].cost;
+  	RequestItemModel.type = listData.items[i].type;
+  	RequestItemModel.source_url = listData.items[i].source_url;
 
   	RequestListModel.items.push(RequestItemModel); 
   }
