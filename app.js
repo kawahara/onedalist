@@ -36,7 +36,8 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/create', routes.createNew);
+app.get('/index', routes.index);
+app.get('/createNew', routes.createNew);
 app.post('/create', routes.create);
 app.get('/show', routes.show);
 

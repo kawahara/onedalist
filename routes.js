@@ -18,7 +18,7 @@ exports.createNew = function(req, res){
  * accept create request and validate
  */
 exports.create = function(req, res) {
-  res.render('index.html', { title: 'Express' });
+  res.render('index.html', { title: 'Express', action: 'create' });
 };
 
 /**
