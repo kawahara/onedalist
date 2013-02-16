@@ -15,7 +15,8 @@ var app = express();
 app.configure(function(){
   swig.init({
     root: __dirname + '/views',
-    allowErrors: true
+    allowErrors: true,
+    cache: false
   });
 
   app.set('port', process.env.PORT || 3000);
