@@ -29,6 +29,9 @@ div.cost .number {
     max-height: 300px;
     overflow: scroll;
 }
+#suggest div.row {
+	margin-left: 0;
+}
 div.description {
 	visibility: hidden;
 	color: gray;

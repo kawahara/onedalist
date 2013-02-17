@@ -1,5 +1,6 @@
 $(function() {
   convertDescription();
+  resetArea();
 
   var getTitle = function(info) {
     if (info.ogTitle) {
@@ -36,11 +37,14 @@ $(function() {
   });
   var addNewSuggestion = function(data) {
     var obj = $("#stmpl").tmpl(data, {isa: true});
+    $('#suggest').show();
     obj.appendTo($('#suggest'));
     convertDescription();
     $(obj).find('.s-add-button').click(function(e){
+      $('#previewArea').show();
       var pitem = $("#stmpl").tmpl(data, {isd: true})
         , i = n++;
+
       $("#make-submit").removeAttr("disabled");
       submitData[i] = data;
       pitem.click(function(event) {
@@ -49,11 +53,13 @@ $(function() {
         if (Object.keys(submitData).length == 0){
           $("#make-submit").attr("disabled", "disabled");
         }
+        resetArea();
         return false;
       });
       pitem.appendTo($('#preview'));
       convertDescription();
       obj.remove();
+      resetArea();
       return;
     });
   };
@@ -82,7 +88,7 @@ $(function() {
       },
       error: function(xhr, status, error) {
         $("#suggest").empty();
-        $("#suggest").text('エラー');
+        $("#suggest").text('エラー').show();
       }
     });
 
@@ -116,4 +122,13 @@ function convertDescription() {
       $(this).css({visibility:'visible'});
     }
   });
+};
+
+function resetArea() {
+  if($("#suggest div.row").length == 0){
+    $('#suggest').hide();
+  }
+  if($("#preview div.row").length == 0){
+    $('#previewArea').hide();
+  }
 };
