@@ -4,7 +4,6 @@
 
 
 <div id="listArea">
-  <h4>URL</h4>
   <div class="navbar">
     <div class="navbar-inner">
       <form id="url-form" class="navbar-form pull-left" method="GET" action="#">
@@ -12,7 +11,9 @@
         <button type="submit" class="btn">情報を取得</button>
       </form>
     </div>
+    <i class="icon-exclamation-sign"></i> 楽天市場、楽天トラベル、Yahoo!ショッピング、Cookpad のレシピ URL など
   </div>
+
   <button id="import-r-bookmark" class="btn btn-primary">楽天お気に入りブックマークから入力</button>
   <div id="suggest">
   </div>
@@ -146,13 +147,16 @@ $(function() {
   };
   $("#url-form").submit(function(event){
     var url = event.target.url.value;
+    $("#suggest").empty();
+    $("#suggest").append(
+      $('<img>').attr('src', '/images/ajax-loader.gif')
+    );
     $.ajax({
       type: "GET",
       url: "/api/getInfo",
       data: {url: url},
       dataType: 'json',
       success: function(data) {
-        $("#suggest").empty();
         data.url   = url;
         data.image = getOneImage(data);
         data.title = getTitle(data);
@@ -161,9 +165,12 @@ $(function() {
           .toString()
           .replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
         }
+        $("#suggest").empty();
         addNewSuggestion(data);
       },
       error: function(xhr, status, error) {
+        $("#suggest").empty();
+        $("#suggest").text('エラー');
       }
     });
 
