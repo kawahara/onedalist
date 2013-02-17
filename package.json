@@ -1,5 +1,5 @@
 {
-  "name": "kure",
+  "name": "onedalist",
   "version": "0.8.0",
   "private": true,
   "scripts": {
@@ -19,7 +19,7 @@
   "devDependencies": {
     "vows": "*"
   },
-  "description": "ERROR: No README.md file found!",
+  "description": "The wishlist application.",
   "main": "app.js",
   "devDependencies": {},
   "repository": "",
