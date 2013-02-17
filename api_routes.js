@@ -5,7 +5,13 @@ var getPageOverview = require('./lib/getpageoverview')
 
 exports.responseInfomation = function(req, res){
     var url = req.query.url;
+
     res.header('Content-Type', 'application/json;')
+    if (req.session._csrf != req.query.token) {
+        res.status(403);
+        res.send('{}');
+        return;
+    }
     if (!url) {
 
         res.status(400);
@@ -27,6 +33,7 @@ exports.responseInfomation = function(req, res){
 exports.getRakutenFb = function(req, res) {
     var code = req.query.code
         , url = '';
+
     if (code) {
 
         url = 'https://app.rakuten.co.jp/services/token';

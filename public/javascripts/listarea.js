@@ -72,7 +72,7 @@ $(function() {
     $.ajax({
       type: "GET",
       url: "/api/getInfo",
-      data: {url: url},
+      data: {url: url, token: window._csrf},
       dataType: 'json',
       success: function(data) {
         data.url   = url;

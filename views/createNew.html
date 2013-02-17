@@ -97,4 +97,7 @@
 <input type="hidden" value="${type}" name="item[${n}][type]">
 </script>
 {% endraw %}
+<script>
+window._csrf = '{{ _csrf }}';
+</script>
 {% endblock %}
