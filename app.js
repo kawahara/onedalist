@@ -33,12 +33,15 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.engine('.html', cons.swig);
   app.set('view engine', 'html');
-  app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser(config.rakuten_api.secret));
+  app.use(express.session());
+  app.use(express.csrf());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+
 });
 
 app.configure('development', function(){
@@ -48,10 +51,15 @@ app.configure('development', function(){
 app.configure('production', function() {
 });
 
+var csrf = function(req, res, next) {
+  res.locals.token  = req.session._csrf;
+  next();
+}
+
 // pages
 app.get('/', routes.index);
 app.get('/index', routes.index);
-app.get('/create', routes.createNew);
+app.get('/create', csrf, routes.createNew);
 app.post('/create', routes.create);
 app.get('/show/:id', routes.checkId, routes.show);
 

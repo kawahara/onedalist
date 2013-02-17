@@ -28,6 +28,7 @@
     <div class="navbar-inner">
       <form id="make" class="navbar-form pull-left" method="POST" action="/create">
         <input type="text" class="span8" id="input-subject" name="subject" placeholder="リストの名前を入力してください" required>
+        <input type="hidden" name="_csrf" value="{{ _csrf }}">
         <button id="make-submit" type="submit" class="btn btn-primary">作成</button>
       </form>
     </div>

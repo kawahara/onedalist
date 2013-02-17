@@ -14,7 +14,7 @@ exports.index = function(req, res){
  * create form
  */
 exports.createNew = function(req, res){
-  res.render('createNew.html', { config: config, action: 'createNew' });
+  res.render('createNew.html', { config: config, action: 'createNew', _csrf: res.locals.token });
 };
 
 /**
@@ -46,7 +46,7 @@ exports.create = function(req, res) {
 
   RequestListModel.save(function(err) {
     if (err) {
-      res.render('createNew.html', { config: config, action: 'createNew' });
+      res.render('createNew.html', { config: config, action: 'createNew', _csrf: res.locals.token });
       return;
     }
 
