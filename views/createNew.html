@@ -2,40 +2,40 @@
 
 {% block contents %}
 
-<div id="mainArea">
-  <h4>Name</h4>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <form class="navbar-form pull-left" method="GET" action="check">
-      <input type="text" class="span8" name="name" placeholder="input your favor name">
-      </form>
-    </div>
-  </div>
-</div>
 
 <div id="listArea">
   <h4>URL</h4>
   <div class="navbar">
     <div class="navbar-inner">
       <form id="url-form" class="navbar-form pull-left" method="GET" action="#">
-        <input type="text" class="span8" name="url" placeholder="input url">
-        <button type="submit" class="btn">Check</button>
+        <input type="text" class="span8" name="url" placeholder="input url" required>
+        <button type="submit" class="btn">情報を取得</button>
       </form>
     </div>
   </div>
+  <button id="import-r-bookmark" class="btn btn-primary">楽天お気に入りブックマークから入力</button>
   <div id="suggest">
   </div>
 
 </div>
+
 
 <h4>Preview</h4>
 <div id="preview">
 
 </div>
 
-<form id="make" method="POST" action="/create">
-  <button type="submit" class="btn btn-primary">作成</button>
-</form>
+<div id="mainArea">
+  <h4>Name</h4>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <form id="make" class="navbar-form pull-left" method="POST" action="/create">
+        <input type="text" class="span8" id="input-subject" name="name" placeholder="input your favor name" required>
+        <button id="make-submit" type="submit" class="btn btn-primary">作成</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
@@ -74,6 +74,7 @@ ${hoge}
 <input type="hidden" value="${image}" name="item[${n}][image]">
 <input type="hidden" value="${url}" name="item[${n}][url]">
 </script>
+{% endraw %}
 <script>
 $(function() {
   var getTitle = function(info) {
@@ -98,7 +99,31 @@ $(function() {
   var n = 0;
 
   $("#preview").empty();
-  $("#make").hide();
+  $("#make-submit").attr("disabled", "disabled");
+  $("#make").submit(function(event) {
+    $('<input>')
+      .attr('type', 'hidden')
+      .attr('name', 'subject')
+      .attr('value', $("#input-subject").val())
+      .appendTo('#make');
+
+  });
+  $("#import-r-bookmark").click(function(event) {
+    window.open('https://app.rakuten.co.jp/services/authorize?response_type=code&client_id={{ config.rakuten_api.application_id }}&redirect_uri='+encodeURIComponent('http://localhost:3000/api/rakuten/fb')+'&scope=rakuten_favoritebookmark_read', '', 'width=600,height=500,resizable=yes,scrollbars=yes');
+  });
+  var addNewSuggestion = function(data) {
+    var obj = $("#stmpl").tmpl(data, {isa: true});
+    obj.appendTo($('#suggest'));
+    $(obj).find('.s-add-button').click(function(e){
+      data.n = n;
+      $("#make-submit").removeAttr("disabled");
+      $("#stmpl").tmpl(data).appendTo($('#preview'));
+      $("#tinput").tmpl(data).appendTo($('#make'));
+      obj.remove();
+      n++;
+      return;
+    });
+  };
   $("#url-form").submit(function(event){
     var url = event.target.url.value;
     $.ajax({
@@ -110,20 +135,8 @@ $(function() {
         $("#suggest").empty();
         data.url   = url;
         data.image = getOneImage(data);
-        data.type  = "type";
         data.title = getTitle(data);
-
-        var obj = $("#stmpl").tmpl(data, {isa: true});
-        obj.appendTo($('#suggest'));
-        $(obj).find('.s-add-button').click(function(e){
-          data.n = n;
-          $("#make").show();
-          $("#stmpl").tmpl(data).appendTo($('#preview'));
-          $("#tinput").tmpl(data).appendTo($('#make'));
-          obj.remove();
-          n++;
-          return;
-        });
+        addNewSuggestion(data);
       },
       error: function(xhr, status, error) {
       }
@@ -131,7 +144,19 @@ $(function() {
 
     return false;
   });
+  window.onGetRakutenFb = function(data) {
+    $("#suggest").empty();
+    $(data.items).each(function(i, item) {
+      var item = item.item;
+      var d = {};
+      d.url = item.itemUrl;
+      d.image = item.mediumImageUrl;
+      d.type = "ほしい";
+      d.title = item.itemName;
+      addNewSuggestion(d);
+    });
+    return;
+  };
 });
 </script>
-{% endraw %}
 {% endblock %}

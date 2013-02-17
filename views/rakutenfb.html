@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <script>
+            {% autoescape false %}
+            var data = {{ data }};
+            {% endautoescape %}
+            window.opener.onGetRakutenFb(data);
+            window.close();
+        </script>
+    </body>
+</html>

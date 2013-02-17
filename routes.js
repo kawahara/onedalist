@@ -1,5 +1,6 @@
-var model = require('./lib/model');
-var crypto = require('crypto');
+var model = require('./lib/model')
+  , crypto = require('crypto')
+  , config = require('./config');
 
 /**
  * get home page
@@ -12,7 +13,7 @@ exports.index = function(req, res){
  * create form
  */
 exports.createNew = function(req, res){
-  res.render('createNew.html', { title: 'Express', action: 'createNew' });
+  res.render('createNew.html', { config: config, action: 'createNew' });
 };
 
 /**
@@ -32,29 +33,43 @@ exports.create = function(req, res) {
 
   for(var i = 0; i < listData.item.length; i++) {
     RequestItemModel = new model.RequestItem();
-    RequestItemModel.subject = listData.item[i].title;
-    RequestItemModel.overview = listData.item[i].overview;
+    RequestItemModel.title = listData.item[i].title;
+    RequestItemModel.image = listData.item[i].image;
     RequestItemModel.cost = listData.item[i].cost;
     RequestItemModel.type = listData.item[i].type;
-    RequestItemModel.source_url = listData.item[i].url;
+    RequestItemModel.url = listData.item[i].url;
 
     RequestListModel.items.push(RequestItemModel); 
   }
+
   RequestListModel.save(function(err) {
     if (err) {
-      res.render('createNew.html', { title: 'Express', action: 'createNew' });
+      res.render('createNew.html', { config: config, action: 'createNew' });
       return;
     }
 
     res.redirect('/show/' + uniq_code);
     return;
   });
-
 };
 
 /**
  * show
  */
 exports.show = function(req, res) {
-  res.render('index.html', { title: 'Express' });
+  console.log(req.params.id);
+  model.RequestList.findOne({'code': req.params.id }, function(err, doc) {
+    if (err) {
+      res.status(500);
+      res.render('error.html');
+      return;
+    }
+    if (doc) {
+      res.render('show.html', { doc: doc });
+      return;
+    }
+
+    res.status(400);
+    res.render('error.html');
+  });
 };

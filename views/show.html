@@ -3,44 +3,31 @@
 {% block contents %}
 
 <div id="mainArea">
-  <h4>Name</h4>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <form class="navbar-form pull-left" method="GET" action="check">
-      <input type="text" class="span8" name="name" placeholder="input your favor name">
-      </form>
-    </div>
-  </div>
+  <h4>{{ doc.subject }}</h4>
 </div>
 
 <div id="listArea">
-  <h4>URL</h4>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <form class="navbar-form pull-left" method="GET" action="check">
-      <input type="text" class="span8" name="url" placeholder="input url">
-      <button type="submit" class="btn">Check</button>
-      </form>
-      <div id="suggestionArea">
-        <span class="label">Default</span>
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <!-- Nested media object -->
-            <div class="media">
-            </div>
-          </div>
-        </div>
-      </div>
+  {% for item in doc.items -%}
+  <div class="row">
+    <div class="span1">
+      {{item.type}}
+    </div>
+    <div class="span4">
+      {% if item.image %}
+        <a href="{{item.url}}"><img src="{{item.image}}" /></a>
+      {% endif %}
+    </div>
+    <div class="span6">
+      <div class="title"><a href="{{item.url}}">{{ item.title }}</a></div>
+      {% if item.cost %}
+      <div class="cost">{{ item.cost }}</div>
+      {% endif %}
+      {% if item.description %}
+      <div class="description">{{ item.description }}</div>
+      {% endif %}
     </div>
   </div>
-</div>
-
-<div id="previewArea">
-  <h4>Preview</h4>
+  {% endfor %}
 </div>
 
 {% endblock %}
