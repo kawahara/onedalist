@@ -57,5 +57,18 @@ exports.create = function(req, res) {
  * show
  */
 exports.show = function(req, res) {
-  res.render('index.html', { title: 'Express' });
+  console.log(req.params.id);
+  model.RequestList.find({'code': req.params.id }, function(err, doc) {
+    if (err) {
+      res.status(500);
+      return;
+    }
+
+    if (doc) {
+      res.render('show.html', { list: doc });
+      return;
+    }
+
+    res.status(404);
+  });
 };

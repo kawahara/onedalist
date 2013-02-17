@@ -2,24 +2,14 @@
 
 {% block contents %}
 
-<div id="mainArea">
-  <h4>Name</h4>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <form class="navbar-form pull-left" method="GET" action="check">
-      <input type="text" class="span8" id="input-subject" name="name" placeholder="input your favor name">
-      </form>
-    </div>
-  </div>
-</div>
 
 <div id="listArea">
   <h4>URL</h4>
   <div class="navbar">
     <div class="navbar-inner">
       <form id="url-form" class="navbar-form pull-left" method="GET" action="#">
-        <input type="text" class="span8" name="url" placeholder="input url">
-        <button type="submit" class="btn">Check</button>
+        <input type="text" class="span8" name="url" placeholder="input url" required>
+        <button type="submit" class="btn">情報を取得</button>
       </form>
     </div>
   </div>
@@ -35,9 +25,17 @@
 
 </div>
 
-<form id="make" method="POST" action="/create">
-  <button type="submit" class="btn btn-primary">作成</button>
-</form>
+<div id="mainArea">
+  <h4>Name</h4>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <form id="make" class="navbar-form pull-left" method="POST" action="/create">
+        <input type="text" class="span8" id="input-subject" name="name" placeholder="input your favor name" required>
+        <button id="make-submit" type="submit" class="btn btn-primary">作成</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
@@ -101,7 +99,7 @@ $(function() {
   var n = 0;
 
   $("#preview").empty();
-  $("#make").hide();
+  $("#make-submit").attr("disabled", "disabled");
   $("#make").submit(function(event) {
     $('<input>')
       .attr('type', 'hidden')
@@ -118,7 +116,7 @@ $(function() {
     obj.appendTo($('#suggest'));
     $(obj).find('.s-add-button').click(function(e){
       data.n = n;
-      $("#make").show();
+      $("#make-submit").removeAttr("disabled");
       $("#stmpl").tmpl(data).appendTo($('#preview'));
       $("#tinput").tmpl(data).appendTo($('#make'));
       obj.remove();
