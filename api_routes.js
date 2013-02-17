@@ -44,7 +44,6 @@ exports.getRakutenFb = function(req, res) {
         }, function(error, response, body) {
             if (response.statusCode == 200) {
                 var token = JSON.parse(body);
-                console.log('hoge');
                 request('https://app.rakuten.co.jp/services/api/FavoriteBookmark/List/20120627'
                     + '?access_token=' + token.access_token
                     + '&hits=30', function(error, response, body) {

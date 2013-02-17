@@ -12,6 +12,7 @@ var express = require('express')
   , swig = require('swig');
 
 var app = express();
+
 app.configure(function(){
   swig.init({
     root: __dirname + '/views',
@@ -38,6 +39,9 @@ app.configure(function(){
 
 app.configure('development', function(){
   app.use(express.errorHandler());
+});
+
+app.configure('production', function() {
 });
 
 // pages

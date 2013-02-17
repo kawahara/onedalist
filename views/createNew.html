@@ -42,7 +42,6 @@
 
 {% raw %}
 <script id="stmpl" type="text/x-jquery-tmpl">
-${hoge}
 <div class="row">
   <div class="span1">
     ${type}
@@ -123,7 +122,7 @@ $(function() {
     }
   });
   $("#import-r-bookmark").click(function(event) {
-    window.open('https://app.rakuten.co.jp/services/authorize?response_type=code&client_id={{ config.rakuten_api.application_id }}&redirect_uri='+encodeURIComponent('http://localhost:3000/api/rakuten/fb')+'&scope=rakuten_favoritebookmark_read', '', 'width=600,height=500,resizable=yes,scrollbars=yes');
+    window.open('https://app.rakuten.co.jp/services/authorize?response_type=code&client_id={{ config.rakuten_api.application_id }}&redirect_uri='+encodeURIComponent('{{ config.base_url }}/api/rakuten/fb')+'&scope=rakuten_favoritebookmark_read', '', 'width=600,height=500,resizable=yes,scrollbars=yes');
   });
   var addNewSuggestion = function(data) {
     var obj = $("#stmpl").tmpl(data, {isa: true});
