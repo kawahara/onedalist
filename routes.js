@@ -84,7 +84,7 @@ exports.checkId = function(req,res,next) {
 
     if (!doc) {
       res.status(400);
-      res.render('error.html', { err: 'そのリストは存在しません' });
+      res.render('error.html', { err: 'おねだリストが存在しません' });
       return;
     }
     req.validparams.id = req.params.id;

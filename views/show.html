@@ -4,6 +4,7 @@
 
 <div id="mainArea">
   <h4>{{ doc.subject }}</h4>
+  <hr>
 </div>
 
 <div id="listArea">
@@ -30,4 +31,19 @@
   {% endfor %}
 </div>
 
+<div id="shareArea">
+  <h4>このリストを共有</h4>
+  <hr>
+  <input type="text" class="span8" id="share_url"　name="share_url" value="#">
+
+</div>
+
+{% endblock %}
+
+{% block bottom %}
+<script>
+  $(function() {
+    $("#share_url").val(location.href);
+  });
+</script>
 {% endblock %}
