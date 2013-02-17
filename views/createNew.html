@@ -99,5 +99,7 @@
 {% endraw %}
 <script>
 window._csrf = '{{ _csrf }}';
+window.r_application_id = '{{ config.rakuten_api.application_id }}';
+window.base_url = '{{ config.base_url }}';
 </script>
 {% endblock %}
