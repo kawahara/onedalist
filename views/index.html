@@ -1,7 +1,73 @@
 {% extends 'layout.html' %}
 
 {% block contents %}
+
+<!--
 <div class="hero-unit">
     <h1>こんにちはようこそ</h1>
 </div>
+-->
+<div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item">
+          <img src="images/slide-01.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>プレゼントを買ってもらおう</h1>
+              <p class="lead"></p>
+              <a class="btn btn-large btn-primary" href="create">お願いを作成</a>
+            </div>
+          </div>
+        </div>
+        <div class="item active left">
+          <img src="images/slide-02.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>旅行に連れて行ってもらおう</h1>
+              <p class="lead"></p>
+              <a class="btn btn-large btn-primary" href="create">お願いを作成</a>
+            </div>
+          </div>
+        </div>
+        <div class="item next left">
+          <img src="images/slide-03.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>食べたい料理を作ってもらおう</h1>
+              <p class="lead"></p>
+              <a class="btn btn-large btn-primary" href="create">お願いを作成</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="" data-slide="prev">‹</a>
+      <a class="right carousel-control" href="" data-slide="next">›</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block bottom %}
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="bootstrap/js/jquery.js"></script>
+<script src="bootstrap/js/bootstrap-transition.js"></script>
+<script src="bootstrap/js/bootstrap-alert.js"></script>
+<script src="bootstrap/js/bootstrap-modal.js"></script>
+<script src="bootstrap/js/bootstrap-dropdown.js"></script>
+<script src="bootstrap/js/bootstrap-scrollspy.js"></script>
+<script src="bootstrap/js/bootstrap-tab.js"></script>
+<script src="bootstrap/js/bootstrap-tooltip.js"></script>
+<script src="bootstrap/js/bootstrap-popover.js"></script>
+<script src="bootstrap/js/bootstrap-button.js"></script>
+<script src="bootstrap/js/bootstrap-collapse.js"></script>
+<script src="bootstrap/js/bootstrap-carousel.js"></script>
+<script src="bootstrap/js/bootstrap-typeahead.js"></script>
+<script>
+  !function ($) {
+    $(function(){
+      // carousel demo
+      $('#myCarousel').carousel()
+    })
+  }(window.jQuery)
+</script>
+<script src="bootstrap/js/holder.js"></script>
 {% endblock %}
