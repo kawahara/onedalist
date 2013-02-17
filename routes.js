@@ -1,5 +1,6 @@
-var model = require('./lib/model');
-var crypto = require('crypto');
+var model = require('./lib/model')
+  , crypto = require('crypto')
+  , config = require('./config');
 
 /**
  * get home page
@@ -12,7 +13,7 @@ exports.index = function(req, res){
  * create form
  */
 exports.createNew = function(req, res){
-  res.render('createNew.html', { title: 'Express', action: 'createNew' });
+  res.render('createNew.html', { config: config, action: 'createNew' });
 };
 
 /**
@@ -43,7 +44,7 @@ exports.create = function(req, res) {
 
   RequestListModel.save(function(err) {
     if (err) {
-      res.render('createNew.html', { title: 'Express', action: 'createNew' });
+      res.render('createNew.html', { config: config, action: 'createNew' });
       return;
     }
 
