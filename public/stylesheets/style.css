@@ -1,4 +1,16 @@
+@import url(http://fonts.googleapis.com/css?family=Krona+One);
+
 body {
     padding-top: 60px;
     padding-bottom: 40px;
+}
+
+div.cost {
+    padding: 5px;
+    font-size: 21px;
+    color: #BF0000;
+}
+
+div.cost .number {
+    font-family: 'Krona One', cursive;
 }

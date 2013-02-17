@@ -79,7 +79,7 @@ exports.checkId = function(req,res,next) {
       res.render('error.html', { err: err });
       return;
     }
-    console.log(doc);
+
     if (!doc) {
       res.status(400);
       res.render('error.html', { err: 'そのリストは存在しません' });

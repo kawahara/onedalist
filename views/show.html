@@ -18,9 +18,9 @@
       {% endif %}
     </div>
     <div class="span6">
-      <div class="title"><a href="{{item.url}}">{{ item.title }}</a></div>
+      <div class="title"><a href="{{item.url}}" target="_blank">{{ item.title }}</a></div>
       {% if item.cost %}
-      <div class="cost">{{ item.cost }}</div>
+      <div class="cost">￥<span class="number">{{ item.cost | number_format }}</span></div>
       {% endif %}
       {% if item.description %}
       <div class="description">{{ item.description }}</div>
