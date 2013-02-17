@@ -33,7 +33,10 @@ $(function() {
     }
   });
   $("#import-r-bookmark").click(function(event) {
-    window.open('https://app.rakuten.co.jp/services/authorize?response_type=code&client_id={{ config.rakuten_api.application_id }}&redirect_uri='+encodeURIComponent('{{ config.base_url }}/api/rakuten/fb')+'&scope=rakuten_favoritebookmark_read', '', 'width=600,height=500,resizable=yes,scrollbars=yes');
+    window.open('https://app.rakuten.co.jp/services/authorize'
+      + '?response_type=code&client_id=' + window.r_application_id
+      + '&redirect_uri='+encodeURIComponent(window.base_url + '/api/rakuten/fb')
+      + '&scope=rakuten_favoritebookmark_read', '', 'width=600,height=500,resizable=yes,scrollbars=yes');
   });
   var addNewSuggestion = function(data) {
     var obj = $("#stmpl").tmpl(data, {isa: true});
@@ -70,7 +73,7 @@ $(function() {
     $.ajax({
       type: "GET",
       url: "/api/getInfo",
-      data: {url: url},
+      data: {url: url, token: window._csrf},
       dataType: 'json',
       success: function(data) {
         data.url   = url;
