@@ -5,6 +5,8 @@
         <title>{% block title %}おねだリスト - open wish list -{% endblock %}</title>
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="/stylesheets/style.css" rel="stylesheet">
+        <meta property="og:title" content="{% block title %}おねだリスト - open wish list -{% endblock %}">
+        <meta property="og:image" content="{{ '/images/logo.gif'|path_to }}">
     </head>
     <body>
         {% block top %}
@@ -31,7 +33,6 @@
             {% endblock %}
             <hr>
             <footer>
-                <p>Copyright (c) 2013 Team-nomonos All Rights Reserved.</p>
 <!-- Rakuten Web Services Attribution Snippet FROM HERE -->
 <a href="http://webservice.rakuten.co.jp/" target="_blank"><img src="http://webservice.rakuten.co.jp/img/credit/200709/credit_22121.gif" border="0" alt="楽天ウェブサービスセンター" title="楽天ウェブサービスセンター" width="221" height="21"/></a>
 <!-- Rakuten Web Services Attribution Snippet TO HERE -->
@@ -40,6 +41,13 @@
 <a href="http://developer.yahoo.co.jp/about">
 <img src="http://i.yimg.jp/images/yjdn/yjdn_attbtn1_88_35.gif" width="88" height="35" title="Webサービス by Yahoo! JAPAN" alt="Web Services by Yahoo! JAPAN" border="0" style="margin:15px 15px 15px 15px"></a>
 <!-- End Yahoo! JAPAN Web Services Attribution Snippet -->
+
+<p>
+    <a href="http://www.ashinari.com/2012/08/22-367735.php" target="_blank">写真素材1</a> 
+    <a href="http://www.ashinari.com/2012/01/03-355476.php" target="_blank">写真素材2</a> 
+    <a href="http://www.ashinari.com/2012/06/14-363414.php" target="_blank">写真素材3</a> 
+</p>
+<p>Copyright (c) 2013 Team-nomonos All Rights Reserved.</p>
 
             </footer>
         </div>
