@@ -2,5 +2,8 @@ module.exports = {
     rakuten_api: {
         application_id: '',
         secret: ''
+    },
+    yahoo_j_api: {
+        appid: ''
     }
 };

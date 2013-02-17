@@ -57,7 +57,6 @@ exports.create = function(req, res) {
  * show
  */
 exports.show = function(req, res) {
-  console.log(req.params.id);
   model.RequestList.findOne({'code': req.params.id }, function(err, doc) {
     if (err) {
       res.status(500);
