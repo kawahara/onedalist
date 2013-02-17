@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% block title %}{{ doc.subject }}: おねだリスト - open wish list -{% endblock %}
+
 {% block top %}
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -21,7 +23,7 @@
   {% for item in doc.items -%}
   <div class="row">
     <div class="span1">
-      {{item.type}}
+      <span class="badge badge-important">{{item.type}}</span>
     </div>
     <div class="span4">
       {% if item.image %}

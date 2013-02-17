@@ -2,7 +2,6 @@
 
 {% block contents %}
 
-
 <div id="listArea">
   <div class="navbar">
     <div class="navbar-inner">
@@ -43,7 +42,19 @@
 <script id="stmpl" type="text/x-jquery-tmpl">
 <div class="row">
   <div class="span1">
-    ${type}
+    {{if $item.isa }}
+    <select class="select_type" style="width:80px">
+      <option{{if type == 'ほしい'}} selected{{/if}}>ほしい</option>
+      <option{{if type == 'いきたい'}} selected{{/if}}>いきたい</option>
+      <option{{if type == 'つくってほしい'}} selected{{/if}}>つくってほしい</option>
+      <option{{if type == 'みたい'}} selected{{/if}}>みたい</option>
+      <option{{if type == 'たべたい'}} selected{{/if}}>たべたい</option>
+      <option{{if type == 'おねがい'}} selected{{/if}}>おねがい</option>
+    </select>
+    {{/if}}
+    {{if $item.isd }}
+    <span class="badge badge-important">${type}</span>
+    {{/if}}
   </div>
   <div class="span3">
     {{if image }}
@@ -84,5 +95,4 @@
 <input type="hidden" value="${type}" name="item[${n}][type]">
 </script>
 {% endraw %}
-
 {% endblock %}

@@ -9,7 +9,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , cons = require('consolidate')
-  , swig = require('swig');
+  , swig = require('swig')
+  , config = require('./config');
 
 var app = express();
 
@@ -21,6 +22,9 @@ app.configure(function(){
     filters: {
       number_format: function(input) {
         return input.toString().replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
+      },
+      path_to: function(input) {
+        return config.base_url + input.toString();
       }
     }
   });
