@@ -16,7 +16,12 @@ app.configure(function(){
   swig.init({
     root: __dirname + '/views',
     allowErrors: true,
-    cache: false
+    cache: false,
+    filters: {
+      number_format: function(input) {
+        return input.toString().replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
+      }
+    }
   });
 
   app.set('port', process.env.PORT || 3000);
@@ -35,11 +40,14 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+// pages
 app.get('/', routes.index);
 app.get('/index', routes.index);
 app.get('/create', routes.createNew);
 app.post('/create', routes.create);
 app.get('/show/:id', routes.checkId, routes.show);
+
+// apis
 app.get('/api/getInfo', apiRoutes.responseInfomation);
 app.get('/api/rakuten/fb', apiRoutes.getRakutenFb);
 

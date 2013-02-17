@@ -55,8 +55,8 @@ ${hoge}
   </div>
   <div class="span5">
     <div class="title">${title}</div>
-    {{if cost }}
-    <div class="cost">${cost}</div>
+    {{if formattedCost }}
+    <div class="cost">￥<span class="number">${formattedCost}</span></div>
     {{/if}}
     {{if description}}
     <div class="description">${description}</div>
@@ -119,6 +119,7 @@ $(function() {
       var data = submitData[keys[i]];
       data.n = j;
       $("#tinput").tmpl(data).appendTo($('#make'));
+      j++;
     }
   });
   $("#import-r-bookmark").click(function(event) {
@@ -158,6 +159,11 @@ $(function() {
         data.url   = url;
         data.image = getOneImage(data);
         data.title = getTitle(data);
+        if (data.cost) {
+          data.formattedCost = data.cost
+          .toString()
+          .replace(/([\d]+?)(?=(?:\d{3})+$)/g, function(t){ return t + ','; });
+        }
         addNewSuggestion(data);
       },
       error: function(xhr, status, error) {
