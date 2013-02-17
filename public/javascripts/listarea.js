@@ -47,9 +47,9 @@ $(function() {
       var pitem = $("#stmpl").tmpl(data, {isd: true})
         , i = n++;
       $("#make-submit").removeAttr("disabled");
-      submitData[i] = data;
+      submitData['data_' + i] = data;
       pitem.click(function(event) {
-        delete submitData[i];
+        delete submitData['data_' + i];
         pitem.remove();
         if (Object.keys(submitData).length == 0){
           $("#make-submit").attr("disabled", "disabled");
