@@ -1,6 +1,7 @@
 var model = require('./lib/model')
   , crypto = require('crypto')
-  , config = require('./config');
+  , config = require('./config')
+  , async = require('async');
 
 /**
  * get home page
@@ -57,19 +58,35 @@ exports.create = function(req, res) {
  * show
  */
 exports.show = function(req, res) {
-  console.log(req.params.id);
+  var tasks = [];
+  async.series(tasks, function(err){
+    if(err){
+      res.status(500);
+      res.render('error.html');
+    } else {
+      res.render('show.html', { doc: req.validparams});
+    }
+  });
+};
+
+
+exports.checkId = function(req,res,next) {
+  req.validparams = {};
   model.RequestList.findOne({'code': req.params.id }, function(err, doc) {
     if (err) {
       res.status(500);
-      res.render('error.html');
+      res.render('error.html', { err: err });
       return;
     }
-    if (doc) {
-      res.render('show.html', { doc: doc });
+    console.log(doc);
+    if (!doc) {
+      res.status(400);
+      res.render('error.html', { err: 'そのリストは存在しません' });
       return;
     }
-
-    res.status(400);
-    res.render('error.html');
+    req.validparams.id = req.params.id;
+    req.validparams.subject = doc.subject;
+    req.validparams.items = doc.items;
+    next();
   });
 };
