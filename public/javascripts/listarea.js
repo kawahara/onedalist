@@ -37,14 +37,12 @@ $(function() {
   });
   var addNewSuggestion = function(data) {
     var obj = $("#stmpl").tmpl(data, {isa: true});
-    $('#suggest').show();
     obj.appendTo($('#suggest'));
     convertDescription();
+    resetArea()
     $(obj).find('.s-add-button').click(function(e){
-      $('#previewArea').show();
       var pitem = $("#stmpl").tmpl(data, {isd: true})
         , i = n++;
-
       $("#make-submit").removeAttr("disabled");
       submitData[i] = data;
       pitem.click(function(event) {
@@ -88,7 +86,8 @@ $(function() {
       },
       error: function(xhr, status, error) {
         $("#suggest").empty();
-        $("#suggest").text('エラー').show();
+        $("#suggest").text('エラー');
+        resetArea();
       }
     });
 
@@ -126,9 +125,13 @@ function convertDescription() {
 
 function resetArea() {
   if($("#suggest div.row").length == 0){
-    $('#suggest').hide();
+    $('#suggestArea').hide();
+  } else {
+    $('#suggestArea').show();
   }
   if($("#preview div.row").length == 0){
     $('#previewArea').hide();
+  } else {
+    $('#previewArea').show();
   }
 };
