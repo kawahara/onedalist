@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}おねだリスト - open wish list -{% endblock %}</title>
@@ -7,6 +7,8 @@
         <link href="/stylesheets/style.css" rel="stylesheet">
     </head>
     <body>
+        {% block top %}
+        {% endblock %}
         <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="navbar-inner">
             <div class="container">

@@ -5,6 +5,10 @@ body {
     padding-bottom: 40px;
 }
 
+li {
+	list-style:none;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 

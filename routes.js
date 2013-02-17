@@ -90,6 +90,7 @@ exports.checkId = function(req,res,next) {
     req.validparams.id = req.params.id;
     req.validparams.subject = doc.subject;
     req.validparams.items = doc.items;
+    req.validparams.share_url = config.base_url + "/show/" + req.params.id
     next();
   });
 };

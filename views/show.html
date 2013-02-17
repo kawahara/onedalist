@@ -1,7 +1,17 @@
 {% extends 'layout.html' %}
 
-{% block contents %}
+{% block top %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_JP/all.js#xfbml=1&appId=242365979148681";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+{% endblock %}
 
+{% block contents %}
 <div id="mainArea">
   <h4>{{ doc.subject }}</h4>
   <hr>
@@ -34,16 +44,22 @@
 <div id="shareArea">
   <h4>このリストを共有</h4>
   <hr>
-  <input type="text" class="span8" id="share_url"　name="share_url" value="#">
-
+  <ul>
+    <li> 
+      <input type="text" class="span6" id="share_url"　name="share_url" value="{{ doc.share_url }}">
+    </li>
+    <li>
+      <a href="https://twitter.com/intent/tweet?button_hashtag=onedalist&text=%E3%81%93%E3%82%8C%E3%81%8C%E3%81%BB%E3%81%97%E3%80%9C%E3%81%AE%EF%BC%81" class="twitter-hashtag-button" data-lang="ja" data-size="large" data-url="{{ doc.share_url }}" data-dnt="true">Tweet #onedalist</a>
+      <fb:like href="{{ doc.share_url }}" send="true" width="450" show_faces="true" font="arial"></fb:like>
+    </li>
+  </ul>
 </div>
 
 {% endblock %}
 
+
 {% block bottom %}
-<script>
-  $(function() {
-    $("#share_url").val(location.href);
-  });
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 </script>
+
 {% endblock %}
