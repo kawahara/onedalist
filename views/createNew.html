@@ -30,7 +30,7 @@
   <div class="navbar">
     <div class="navbar-inner">
       <form id="make" class="navbar-form pull-left" method="POST" action="/create">
-        <input type="text" class="span8" id="input-subject" name="name" placeholder="input your favor name" required>
+        <input type="text" class="span8" id="input-subject" name="subject" placeholder="input your favor name" required>
         <button id="make-submit" type="submit" class="btn btn-primary">作成</button>
       </form>
     </div>
@@ -53,7 +53,7 @@ ${hoge}
       <img src="${image}" />
     {{/if}}
   </div>
-  <div class="span6">
+  <div class="span5">
     <div class="title">${title}</div>
     {{if cost }}
     <div class="cost">${cost}</div>
@@ -63,8 +63,13 @@ ${hoge}
     {{/if}}
   </div>
   {{if $item.isa }}
-  <div class="span1">
-    <button class="s-add-button btn btn-primary" type="button">Add</button>
+  <div class="span2">
+    <button class="s-add-button btn btn-primary" type="button">リストに追加</button>
+  </div>
+  {{/if}}
+  {{if $item.isd }}
+  <div class="span2">
+    <button class="s-del-button btn btn-danger" type="button">リストから削除</button>
   </div>
   {{/if}}
 </div>
@@ -73,6 +78,12 @@ ${hoge}
 <input type="hidden" value="${title}" name="item[${n}][title]">
 <input type="hidden" value="${image}" name="item[${n}][image]">
 <input type="hidden" value="${url}" name="item[${n}][url]">
+{{if description }}
+<input type="hidden" value="${description}" name="item[${n}][description]">
+{{/if}}
+{{if cost}}
+<input type="hidden" value="${cost}" name="item[${n}][cost]">
+{{/if}}
 </script>
 {% endraw %}
 <script>
@@ -97,16 +108,18 @@ $(function() {
   };
 
   var n = 0;
+  var submitData = {};
 
   $("#preview").empty();
   $("#make-submit").attr("disabled", "disabled");
   $("#make").submit(function(event) {
-    $('<input>')
-      .attr('type', 'hidden')
-      .attr('name', 'subject')
-      .attr('value', $("#input-subject").val())
-      .appendTo('#make');
-
+    var keys = Object.keys(submitData)
+      , j = 0;
+    for (var i = 0; i < keys.length; i++) {
+      var data = submitData[keys[i]];
+      data.n = j;
+      $("#tinput").tmpl(data).appendTo($('#make'));
+    }
   });
   $("#import-r-bookmark").click(function(event) {
     window.open('https://app.rakuten.co.jp/services/authorize?response_type=code&client_id={{ config.rakuten_api.application_id }}&redirect_uri='+encodeURIComponent('http://localhost:3000/api/rakuten/fb')+'&scope=rakuten_favoritebookmark_read', '', 'width=600,height=500,resizable=yes,scrollbars=yes');
@@ -115,12 +128,21 @@ $(function() {
     var obj = $("#stmpl").tmpl(data, {isa: true});
     obj.appendTo($('#suggest'));
     $(obj).find('.s-add-button').click(function(e){
-      data.n = n;
+      var pitem = $("#stmpl").tmpl(data, {isd: true})
+        , i = n++;
       $("#make-submit").removeAttr("disabled");
-      $("#stmpl").tmpl(data).appendTo($('#preview'));
-      $("#tinput").tmpl(data).appendTo($('#make'));
+      submitData[i] = data;
+      pitem.click(function(event) {
+        delete submitData[i];
+        pitem.remove();
+        console.log(submitData.length);
+        if (Object.keys(submitData).length == 0){
+          $("#make-submit").attr("disabled", "disabled");
+        }
+        return false;
+      });
+      pitem.appendTo($('#preview'));
       obj.remove();
-      n++;
       return;
     });
   };

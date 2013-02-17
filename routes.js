@@ -36,6 +36,7 @@ exports.create = function(req, res) {
     RequestItemModel = new model.RequestItem();
     RequestItemModel.title = listData.item[i].title;
     RequestItemModel.image = listData.item[i].image;
+    RequestItemModel.description = listData.item[i].description;
     RequestItemModel.cost = listData.item[i].cost;
     RequestItemModel.type = listData.item[i].type;
     RequestItemModel.url = listData.item[i].url;
