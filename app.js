@@ -40,8 +40,6 @@ app.get('/index', routes.index);
 app.get('/create', routes.createNew);
 app.post('/create', routes.create);
 app.get('/show/:id', routes.checkId, routes.show);
-app.get('/edit/:id', routes.checkId, routes.edit);
-
 app.get('/api/getInfo', apiRoutes.responseInfomation);
 app.get('/api/rakuten/fb', apiRoutes.getRakutenFb);
 
