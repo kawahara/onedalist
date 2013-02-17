@@ -25,11 +25,11 @@
     </div>
     <div class="span4">
       {% if item.image %}
-        <a href="{{item.url}}"><img src="{{item.image}}" /></a>
+        <a href="{{item.url}}" target="_blank"><img src="{{item.image}}" /></a>
       {% endif %}
     </div>
     <div class="span6">
-      <div class="title"><a href="{{item.url}}" target="_blank">{{ item.title }}</a></div>
+      <div class="title bf"><a href="{{item.url}}" target="_blank">{{ item.title }}</a></div>
       {% if item.cost %}
       <div class="cost">￥<span class="number">{{ item.cost | number_format }}</span></div>
       {% endif %}
@@ -44,7 +44,6 @@
 <div id="shareArea">
   <h4>このリストを共有</h4>
   <hr>
-  <ul>
     <li> 
       <input type="text" class="span6" id="share_url"　name="share_url" value="{{ doc.share_url }}">
     </li>
@@ -52,7 +51,6 @@
       <a href="https://twitter.com/intent/tweet?button_hashtag=onedalist&text=%E3%81%93%E3%82%8C%E3%81%8C%E3%81%BB%E3%81%97%E3%80%9C%E3%81%AE%EF%BC%81" class="twitter-hashtag-button" data-lang="ja" data-size="large" data-url="{{ doc.share_url }}" data-dnt="true">Tweet #onedalist</a>
       <fb:like href="{{ doc.share_url }}" send="true" width="450" show_faces="true" font="arial"></fb:like>
     </li>
-  </ul>
 </div>
 
 {% endblock %}
@@ -61,5 +59,5 @@
 {% block bottom %}
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 </script>
-
+<script src="/javascripts/listarea.js"></script>
 {% endblock %}

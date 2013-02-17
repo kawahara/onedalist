@@ -1,12 +1,37 @@
 @import url(http://fonts.googleapis.com/css?family=Krona+One);
-
 body {
     padding-top: 60px;
     padding-bottom: 40px;
+    font-size: 11px;
 }
-
 li {
+	margin-left: 0;
 	list-style:none;
+}
+div.bf {
+	font-size: 13px;
+}
+div.cost {
+    padding: 5px;
+    font-size: 21px;
+    color: #BF0000;
+}
+div.cost .number {
+    font-family: 'Krona One', cursive;
+}
+#import-r-bookmark {
+    margin: 10px;
+}
+#suggest {
+    padding-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #CCCCCC;
+    max-height: 300px;
+    overflow: scroll;
+}
+div.description {
+	visibility: hidden;
+	color: gray;
 }
 
 /* CUSTOMIZE THE NAVBAR
@@ -237,26 +262,4 @@ li {
     line-height: 1.5;
   }
 
-}
-
-div.cost {
-    padding: 5px;
-    font-size: 21px;
-    color: #BF0000;
-}
-
-div.cost .number {
-    font-family: 'Krona One', cursive;
-}
-
-#import-r-bookmark {
-    margin: 10px;
-}
-
-#suggest {
-    padding-top: 5px;
-    border-radius: 10px;
-    border: 1px solid #CCCCCC;
-    max-height: 300px;
-    overflow: scroll;
 }
