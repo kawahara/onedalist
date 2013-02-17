@@ -32,6 +32,8 @@ exports.create = function(req, res) {
   RequestListModel.code = uniq_code;
   RequestListModel.items = [];
 
+  console.log(listData);
+
   for(var i = 0; i < listData.item.length; i++) {
     RequestItemModel = new model.RequestItem();
     RequestItemModel.title = listData.item[i].title;

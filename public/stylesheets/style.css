@@ -244,3 +244,13 @@ div.cost {
 div.cost .number {
     font-family: 'Krona One', cursive;
 }
+
+#import-r-bookmark {
+    margin: 10px;
+}
+
+#suggest {
+    padding-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #CCCCCC;
+}
