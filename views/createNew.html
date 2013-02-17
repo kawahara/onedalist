@@ -43,7 +43,19 @@
 <script id="stmpl" type="text/x-jquery-tmpl">
 <div class="row">
   <div class="span1">
-    ${type}
+    {{if $item.isa }}
+    <select class="select_type" style="width:80px">
+      <option{{if type == 'ほしい'}} selected{{/if}}>ほしい</option>
+      <option{{if type == 'いきたい'}} selected{{/if}}>いきたい</option>
+      <option{{if type == 'つくってほしい'}} selected{{/if}}>つくってほしい</option>
+      <option{{if type == 'みたい'}} selected{{/if}}>みたい</option>
+      <option{{if type == 'たべたい'}} selected{{/if}}>たべたい</option>
+      <option{{if type == 'おねがい'}} selected{{/if}}>おねがい</option>
+    </select>
+    {{/if}}
+    {{if $item.isd }}
+    <span class="badge badge-important">${type}</span>
+    {{/if}}
   </div>
   <div class="span3">
     {{if image }}
@@ -127,7 +139,9 @@ $(function() {
     var obj = $("#stmpl").tmpl(data, {isa: true});
     obj.appendTo($('#suggest'));
     $(obj).find('.s-add-button').click(function(e){
-      var pitem = $("#stmpl").tmpl(data, {isd: true})
+      var pitem = {};
+      data.type = obj.find('.select_type').val();
+      pitem = $("#stmpl").tmpl(data, {isd: true})
         , i = n++;
       $("#make-submit").removeAttr("disabled");
       submitData[i] = data;
