@@ -21,10 +21,10 @@ div.cost .number {
 }
 #import-r-bookmark {
     margin: 10px;
+    margin-left: 0px;
 }
 #suggest, #preview {
     padding-top: 5px;
-    margin-bottom: 5px;
     border-radius: 10px;
     border: 1px solid #CCCCCC;
     max-height: 300px;
@@ -33,15 +33,13 @@ div.cost .number {
 #suggest div.row {
 	margin-left: 0;
 }
+#suggestArea, #previewArea {
+	margin-bottom: 10px;
+}
 div.description {
 	visibility: hidden;
 	color: gray;
 }
-
-div.shareArea iframe {
-	vertical-align: top;
-}
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
