@@ -8,7 +8,7 @@
   <div class="navbar">
     <div class="navbar-inner">
       <form id="url-form" class="navbar-form pull-left" method="GET" action="#">
-        <input type="text" class="span8" name="url" placeholder="input url" required>
+        <input type="text" class="span8" name="url" placeholder="リストに追加したい情報が記載されているURLを入れてください" required>
         <button type="submit" class="btn">情報を取得</button>
       </form>
     </div>
@@ -20,17 +20,16 @@
 </div>
 
 
-<h4>Preview</h4>
+<h4>リストプレビュー</h4>
 <div id="preview">
 
 </div>
 
 <div id="mainArea">
-  <h4>Name</h4>
   <div class="navbar">
     <div class="navbar-inner">
       <form id="make" class="navbar-form pull-left" method="POST" action="/create">
-        <input type="text" class="span8" id="input-subject" name="subject" placeholder="input your favor name" required>
+        <input type="text" class="span8" id="input-subject" name="subject" placeholder="リストの名前を入力してください" required>
         <button id="make-submit" type="submit" class="btn btn-primary">作成</button>
       </form>
     </div>
@@ -48,7 +47,7 @@ ${hoge}
   <div class="span1">
     ${type}
   </div>
-  <div class="span4">
+  <div class="span3">
     {{if image }}
       <img src="${image}" />
     {{/if}}
@@ -84,6 +83,7 @@ ${hoge}
 {{if cost}}
 <input type="hidden" value="${cost}" name="item[${n}][cost]">
 {{/if}}
+<input type="hidden" value="${type}" name="item[${n}][type]">
 </script>
 {% endraw %}
 <script>
@@ -136,7 +136,6 @@ $(function() {
       pitem.click(function(event) {
         delete submitData[i];
         pitem.remove();
-        console.log(submitData.length);
         if (Object.keys(submitData).length == 0){
           $("#make-submit").attr("disabled", "disabled");
         }
