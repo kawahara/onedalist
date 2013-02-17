@@ -257,4 +257,6 @@ div.cost .number {
     padding-top: 5px;
     border-radius: 10px;
     border: 1px solid #CCCCCC;
+    max-height: 300px;
+    overflow: scroll;
 }
