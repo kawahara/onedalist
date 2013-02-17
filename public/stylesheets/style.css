@@ -38,6 +38,10 @@ div.description {
 	color: gray;
 }
 
+div.shareArea iframe {
+	vertical-align: top;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
